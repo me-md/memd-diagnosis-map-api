@@ -7,7 +7,7 @@ cycler==0.10.0
 Deprecated==1.2.7
 descartes==1.1.0
 Fiona==1.8.13
-Flask==0.10.1
+Flask==1.0
 Flask-Migrate==1.8.0
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.1
