@@ -55,6 +55,6 @@ def render_map(condition):
     ax.get_legend().set_bbox_to_anchor((.22,.29))
     current_time = datetime.now()
     date = current_time.strftime('%m-%d-%Y')
-    ax.annotate(f'This map is a representation of {condition} diagnosis across the US among MeMD users only. Last Updated: {date}', xy=(0.1, .08),  xycoords='figure fraction', horizontalalignment='left', verticalalignment='top', fontsize=12, color='#555555')
+    ax.annotate(f'This map is a representation of {condition} diagnosis across the US among MeMD users only. Last Updated: {date}', xy=(0.52, .15),  xycoords='figure fraction', horizontalalignment='center', verticalalignment='top', fontsize=12, color='#555555')
     ax.get_figure()
     return ax
