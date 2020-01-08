@@ -30,7 +30,6 @@ def create():
         db.session.add(condition)
         db.session.commit()
     else:
-
         return "400"
 
 
