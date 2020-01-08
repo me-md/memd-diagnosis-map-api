@@ -3,13 +3,13 @@ load_dotenv()
 
 import os
 # SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://aqomujbsygtsei:11809c8a522596e671ffd9d7e9a4c7d5857e19d77e102ec336966060ad550f21@ec2-174-129-255-15.compute-1.amazonaws.com:5432/d800v3djgfpsfk'
 from flask import Flask, render_template, send_file, make_response, request, abort, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from plot import render_map
 import matplotlib.pyplot as plt
 
-app = Flask(__name__)
 # app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
