@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 import pandas as pd
 import geopandas as gpd
@@ -14,15 +17,8 @@ import io
 from datetime import datetime
 
 from sqlalchemy import create_engine
-POSTGRES_ADDRESS = 'localhost'
-POSTGRES_PORT = '5432'
-POSTGRES_USERNAME = 'nathanthomas'
-POSTGRES_PASSWORD = 'cashflow'
-POSTGRES_DBNAME = 'memd_conditions'
-postgres_str = (f'postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_ADDRESS}:{POSTGRES_PORT}/{POSTGRES_DBNAME}')
-
+postgres_str = os.environ['DATABASE_URL']
 cnx = create_engine(postgres_str)
-
 conditions = pd.read_sql_query('SELECT * FROM conditions', cnx)
 
 conditions = conditions[['name', 'state']]
@@ -32,13 +28,10 @@ states= gpd.read_file('./data/states.shp')
 states_formatted = states[['STATE_ABBR', 'geometry']]
 # Remove Hawaii and Alaska
 usa = states_formatted[~states_formatted.STATE_ABBR.isin(['HI', 'AK'])]
-# usa.head()
 
 merged = usa.set_index('STATE_ABBR').join(conditions_map_data.set_index('STATE_ABBR'))
-# merged.head()
 
 grpd = merged.groupby(['STATE_ABBR','CONDITION']).size().to_frame('NUM').reset_index()
-# grpd.head()
 
 def fetch_map_data(condition):
     user_condition = grpd[grpd.CONDITION == f'{condition}']
