@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
+SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 from flask import Flask, render_template, send_file, make_response, request, abort, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from plot import render_map
