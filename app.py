@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
-from flask import Flask, render_template, send_file, make_response, request
+from flask import Flask, render_template, send_file, make_response, request, abort, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from plot import render_map
 import matplotlib.pyplot as plt
@@ -16,10 +16,23 @@ print(os.environ['APP_SETTINGS'])
 
 from plot import render_map
 from quartile import plot_map
+from models import *
 
 @app.route('/')
 def index():
     return render_template('root_path.html')
+
+@app.route('/conditions', methods=['GET', 'POST'])
+def create():
+    if request.method == "POST":
+        args = request.args
+        condition = Condition(args['state'], args['name'])
+        db.session.add(condition)
+        db.session.commit()
+    else:
+
+        return "400"
+
 
 @app.route('/conditions_map/v1', methods=['GET'])
 def conditions_map_v1():

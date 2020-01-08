@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import JSON
 class Condition(db.Model):
     __tablename__ = 'conditions'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     state = db.Column(db.String())
     name = db.Column(db.String())
 
