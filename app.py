@@ -2,8 +2,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
-from flask import Flask
+from flask import Flask, render_template, send_file, make_response, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from plot import render_map
+# from quartile_plot import plot_map
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -12,18 +15,22 @@ db = SQLAlchemy(app)
 
 print(os.environ['APP_SETTINGS'])
 
-from models import Condition
-
+from plot import render_map
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+def index():
+    return 'We are up and running!'
 
+@app.route('/conditions_map', methods=['GET'])
+def conditions_map_v1():
+    args = request.args
+    render_map(args['condition'])
+    plt.savefig("MeMD_Map.png")
+    return send_file('MeMD_Map.png', mimetype='image/gif')
 
 @app.route('/<name>')
 def hello_name(name):
     return "Hello {}!".format(name)
-
 
 if __name__ == '__main__':
     app.run()
