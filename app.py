@@ -5,7 +5,6 @@ import os
 from flask import Flask, render_template, send_file, make_response, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from plot import render_map
-# from quartile_plot import plot_map
 import matplotlib.pyplot as plt
 
 app = Flask(__name__)
@@ -16,7 +15,7 @@ db = SQLAlchemy(app)
 print(os.environ['APP_SETTINGS'])
 
 from plot import render_map
-from models import *
+from quartile import plot_map
 
 @app.route('/')
 def index():
@@ -26,6 +25,13 @@ def index():
 def conditions_map_v1():
     args = request.args
     render_map(args['condition'])
+    plt.savefig("MeMD_Map.png")
+    return send_file('MeMD_Map.png', mimetype='image/gif')
+
+@app.route('/conditions_map/v2', methods=['GET'])
+def conditions_map_v2():
+    args = request.args
+    plot_map(args['condition'])
     plt.savefig("MeMD_Map.png")
     return send_file('MeMD_Map.png', mimetype='image/gif')
 
