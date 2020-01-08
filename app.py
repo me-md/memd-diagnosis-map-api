@@ -20,9 +20,9 @@ from models import *
 
 @app.route('/')
 def index():
-    return 'We are up and running!'
+    return render_template('root_path.html')
 
-@app.route('/conditions_map', methods=['GET'])
+@app.route('/conditions_map/v1', methods=['GET'])
 def conditions_map_v1():
     args = request.args
     render_map(args['condition'])
