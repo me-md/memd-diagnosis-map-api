@@ -8,7 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from plot import render_map
 import matplotlib.pyplot as plt
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ['APP_SETTINGS']
+app.config['SQLALCHEMY_DATABASE_URI']=(os.environ['DATABASE_URL']
 # app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
