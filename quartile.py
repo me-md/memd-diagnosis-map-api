@@ -21,7 +21,7 @@ conditions = pd.read_sql_query('SELECT * FROM conditions;', cnx)
 conditions = conditions[['name', 'state']]
 conditions_map_data = conditions.rename(index=int, columns={'name':'CONDITION', 'state':'STATE_ABBR'})
 
-states= gpd.read_file('/Users/nathanthomas/turing/4module/projects/mymd2/testing_testing/Data/states.shp')
+states= gpd.read_file('./data/states.shp')
 states_formatted = states[['STATE_ABBR', 'geometry']]
 
 usa = states_formatted[~states_formatted.STATE_ABBR.isin(['HI', 'AK'])]
