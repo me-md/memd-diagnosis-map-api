@@ -17,7 +17,9 @@ import io
 from datetime import datetime
 
 from sqlalchemy import create_engine
-postgres_str = os.environ['DATABASE_URL']
+# postgres_str = os.environ['DATABASE_URL']
+postgres_str = 'postgres://aqomujbsygtsei:11809c8a522596e671ffd9d7e9a4c7d5857e19d77e102ec336966060ad550f21@ec2-174-129-255-15.compute-1.amazonaws.com:5432/d800v3djgfpsfk'
+
 cnx = create_engine(postgres_str)
 conditions = pd.read_sql_query('SELECT * FROM conditions', cnx)
 
