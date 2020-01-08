@@ -16,6 +16,7 @@ db = SQLAlchemy(app)
 print(os.environ['APP_SETTINGS'])
 
 from plot import render_map
+from models import *
 
 @app.route('/')
 def index():
@@ -27,10 +28,6 @@ def conditions_map_v1():
     render_map(args['condition'])
     plt.savefig("MeMD_Map.png")
     return send_file('MeMD_Map.png', mimetype='image/gif')
-
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
 
 if __name__ == '__main__':
     app.run()
